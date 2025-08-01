@@ -4,5 +4,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**User service interface where userdetailservice() is created and implemented in in userserviceimpl class*/
 public interface UserService {
 
-    UserDetailsService userdetailservice();
+    UserDetailsService userDetailService();
 }

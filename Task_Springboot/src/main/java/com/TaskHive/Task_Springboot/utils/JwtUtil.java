@@ -38,7 +38,7 @@ public class JwtUtil {
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
     /** extract username method is called to extract or get username*/
-    private String extractUserName(String token) {
+    public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
