@@ -1,5 +1,6 @@
 package com.TaskHive.Task_Springboot.entities;
 
+import com.TaskHive.Task_Springboot.dto.UserDto;
 import com.TaskHive.Task_Springboot.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,5 +59,15 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserDto getUserDto(){
+        UserDto userDto=new UserDto();
+        userDto.setId(id);
+        userDto.setName(name);
+        userDto.setEmail(email);
+        userDto.setUserRole(userRole);
+        return userDto;
+
     }
 }
