@@ -32,8 +32,9 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->request.requestMatchers("/api/auth/**").permitAll()
-                            .requestMatchers("api/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
-                            .requestMatchers("api/employee/**").hasAuthority(UserRole.EMPLOYEE.name())
+                           // .requestMatchers("/error").permitAll()
+                            .requestMatchers("/api/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
+                            .requestMatchers("/api/employee/**").hasAuthority(UserRole.EMPLOYEE.name())
                             .anyRequest().authenticated()).sessionManagement(manager->manager.sessionCreationPolicy(STATELESS))
 
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -50,6 +51,7 @@ public class WebSecurityConfiguration {
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider=new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userService.userDetailService());
+        authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
